@@ -13,6 +13,7 @@ function App() {
   const [showresult,setShowResult] = useState();
   let [date,setDate] = useState("");
   const [num,setNum] = useState();
+  let [sum,setSum] = useState("");
 
   function handledel(){
   setShow(false);
@@ -22,13 +23,32 @@ function App() {
   
 
   function handleSubmit(e){
+
     e.preventDefault();
+
     
-    const sum = date.split("-").reduce((a, c) => {
-      return Number(a) + Number(c);
-    }, 0);
+
+    var l=0;
+
+     sum = date.split("-");
+
+     for(let i=0;i<3;i++){
+      l = l +  divide(Number(sum[i]));
+     }
      
-    if(sum % num === 0){
+
+    setSum(l);
+    
+   function divide(value){
+    var s = 0 ;
+    while(value){
+      s += value % 10;
+      value = Math.floor(value / 10);
+    }
+    return s;
+    }
+     
+    if(l % num === 0){
       setLucky(true);
     }else {
       setLucky(false);
@@ -50,8 +70,10 @@ function App() {
         <Alerts handledel={handledel}/> : " "}
         <h2>Enter Your Birthdate and lucky number to continue...</h2>
         <Form date={date} setDate={setDate} num={num} setNum={setNum} handleSubmit={handleSubmit}/>
-        {showresult ?  <Result lucky={lucky}/> : " "}
+        {showresult ? <Result lucky={lucky}/> : " "}
+        
         <Footer />
+        
         
       </section>
     </div>
