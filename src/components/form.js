@@ -3,7 +3,7 @@ import {React} from "react";
 const Form = (props) => {
   
     return (
-        <form>
+        <form onSubmit={props.handleSubmit}>
         <label htmlFor="datePicker" className="label">Select your Birth date:</label>
         <input type="date" id="datePicker" required value={props.date}
         onChange={(e) => {props.setDate(e.target.value)}}
@@ -12,7 +12,7 @@ const Form = (props) => {
         <input type="number" required min="1"step="1" id="LuckyNo" 
         onChange={(e) => {props.setNum(e.target.value)}}
         value={props.num}/>
-        <button type="submit" onClick={props.handleSubmit}>check</button>
+        <button type="submit">check</button>
       </form>
     );
 }
